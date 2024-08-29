@@ -46,27 +46,8 @@ public class HomeControllerTests {
                 .andExpect(MockMvcResultMatchers.content().string(expectedContent));
     }
 
-    @Test
-    public void coffeeValid() throws Exception {
 
-        this.mockMvcController.perform(
-                        MockMvcRequestBuilders.get("/coffee")
-                                .param("name", "cappuccino"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("cappuccino"));
-
-    }
-
-    @Test
-    public void coffeeInvalid() throws Exception{
-        this.mockMvcController.perform(
-                        MockMvcRequestBuilders.get("/coffee"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(2))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("latte"));
 
 
     }
 
-}

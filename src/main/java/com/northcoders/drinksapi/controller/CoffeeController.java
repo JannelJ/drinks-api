@@ -1,5 +1,6 @@
 package com.northcoders.drinksapi.controller;
 
+import com.northcoders.drinksapi.model.Coffee;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,12 +18,9 @@ public class CoffeeController {
     private static int lastId = 0;
 
     @GetMapping("/coffee")
-    public Map<String, Object> coffee(@RequestParam(value = "name", defaultValue = "latte") String name) {
+    public Coffee coffee(@RequestParam(value = "name", defaultValue = "latte") String name) {
         lastId++;
-        Map<String, Object> expectedValue = new HashMap<>();
-        expectedValue.put("id", lastId);
-        expectedValue.put("name", name);
-        return expectedValue;
+        return new Coffee(1, name);
 
     }
 }

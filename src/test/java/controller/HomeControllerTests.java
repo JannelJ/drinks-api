@@ -47,21 +47,26 @@ public class HomeControllerTests {
     }
 
     @Test
-    public void coffee() throws Exception {
-
-//       JSONObject expectedContent = new JSONObject();
-//        expectedContent.put("id", 1);
-//        expectedContent.put("name", "cappuccino");
-        Map<String, String> expectedContent = new HashMap<>();
-        expectedContent.put("1", "id");
-        expectedContent.put("name", "cappuccino");
-
-//        String expectedContent = "{\"1\":\"id\",\"name\":\"latte\"}";
+    public void coffeeValid() throws Exception {
 
         this.mockMvcController.perform(
                         MockMvcRequestBuilders.get("/coffee")
                                 .param("name", "cappuccino"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name", is("cappuccino")).value(expectedContent));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("cappuccino"));
+
     }
+
+    @Test
+    public void coffeeInvalid() throws Exception{
+        this.mockMvcController.perform(
+                        MockMvcRequestBuilders.get("/coffee"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("latte"));
+
+
+    }
+
 }
